@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TurkOS Ultimate</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+</head>
+<body id="main-body">
+
+    <!-- Durum Çubuğu -->
+    <div class="status-bar">
+        <div class="status-left">
+            <span id="clock">00:00</span>
+        </div>
+
+        <div class="status-right">
+            <span class="icon">📶</span>
+            <span class="icon">5G</span>
+
+            <div class="battery-container">
+                <span id="battery-level">100%</span>
+
+                <div class="battery-icon">
+                    <div id="battery-bar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Açılış Ekranı -->
+    <div id="boot">
+        <div class="boot-content">
+            <div class="kurt-container">
+                <span class="kurt">🐺</span>
+            </div>
+
+            <h1 class="logo-text">TurkOS</h1>
+        </div>
+
+        <p class="powered">Powered By AI & Android</p>
+    </div>
+
+    <!-- Masaüstü -->
+    <div id="desktop">
+
+        <div class="apps">
+
+            <div class="app" onclick="openApp('msg-app')">
+                <div class="app-icon">💬</div>
+                <span>Mesajlar</span>
+            </div>
+
+            <div class="app" onclick="openApp('settings-app')">
+                <div class="app-icon">⚙️</div>
+                <span>Ayarlar</span>
+            </div>
+
+            <div class="app" onclick="openApp('ai-app')">
+                <div class="app-icon">🤖</div>
+                <span>TurkAI</span>
+            </div>
+
+        </div>
+
+        <!-- Mesajlar -->
+        <div id="msg-app" class="window">
+
+            <div class="win-head">
+                <span>Mesajlar</span>
+                <button class="close-btn" onclick="closeApp('msg-app')">X</button>
+            </div>
+
+            <div id="msg-auth">
+                <input type="text" id="username" placeholder="İsminiz">
+                <input type="number" id="room-code" placeholder="Oda Kodu">
+                <button onclick="joinOnlineRoom()">Bağlan</button>
+            </div>
+
+            <div id="chat-area">
+                <div id="chat-box"></div>
+
+                <div class="input-row">
+                    <input type="text" id="chat-input" placeholder="Mesaj...">
+                    <button onclick="sendOnlineMsg()">➤</button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Ayarlar -->
+        <div id="settings-app" class="window">
+
+            <div class="win-head">
+                <span>Ayarlar</span>
+                <button class="close-btn" onclick="closeApp('settings-app')">X</button>
+            </div>
+
+            <div class="settings-container">
+
+                <div class="s-item" onclick="document.getElementById('wall-in').click()">
+                    <div class="s-icon">🖼️</div>
+
+                    <div class="s-text">
+                        Duvar Kağıdı
+                        <span>Galeriden fotoğraf seç</span>
+                    </div>
+
+                    <input type="file" id="wall-in" accept="image/*" hidden onchange="changeWallpaper(event)">
+                </div>
+
+                <div class="s-item">
+                    <div class="s-icon">🔋</div>
+
+                    <div class="s-text">
+                        Pil
+                        <span>23 Saatlik Mod Aktif</span>
+                    </div>
+                </div>
+
+                <div class="s-item">
+                    <div class="s-icon">📱</div>
+
+                    <div class="s-text">
+                        Sürüm Bilgisi
+                        <span>TurkOS v4.0 Ultimate</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- TurkAI -->
+        <div id="ai-app" class="window">
+
+            <div class="win-head">
+                <span>TurkAI</span>
+                <button class="close-btn" onclick="closeApp('ai-app')">X</button>
+            </div>
+
+            <div id="ai-chat"></div>
+
+            <div id="ai-loading">TurkAI analiz ediyor...</div>
+
+            <div class="input-row">
+                <input type="text" id="ai-input" placeholder="Sorun...">
+                <button onclick="askRealAI()">Sor</button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
